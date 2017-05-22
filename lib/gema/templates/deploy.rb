@@ -1,4 +1,4 @@
-Gema::Setup.new do |setup|
+Setup.new do |setup|
 #		Will be used to set the deploy_to directory and other configurations
   setup.app_name = "my_app_name"
 

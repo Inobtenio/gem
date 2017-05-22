@@ -1,10 +1,10 @@
 namespace :deploy do
 	task :create do
-		Gema::Deploy.create
+		Deploy.create
 	end
 
 	task :test => "setup:check" do
-		Gema::Deploy.connect
+		Deploy.connect
 	end
 	task :update do
 		puts "deploy:update"

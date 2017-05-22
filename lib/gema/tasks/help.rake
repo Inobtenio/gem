@@ -5,7 +5,7 @@ namespace :help do
 
 	task :suggestion, [:command] do |t, args|
 		puts args
-		Gema::Help.suggest args[:command]
+		Help.suggest args[:command]
 	end
 end
 

@@ -1,7 +1,7 @@
 namespace :setup do
   task :check do
   	puts "setup:check"
-  	Gema::Setup.shared_instance.verify
+  	Setup.shared_instance.verify
   end
 
   task :another_task do
