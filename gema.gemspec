@@ -28,6 +28,14 @@ Gem::Specification.new do |spec|
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
 
+  spec.add_runtime_dependency 'net-ssh'
+  spec.add_runtime_dependency 'net-ssh-shell'
+  spec.add_runtime_dependency 'net-scp'
+  spec.add_runtime_dependency 'sshkit', '~> 1.10'
+  spec.add_runtime_dependency 'sshkit-sudo', '~> 0.1.0'
+  spec.add_runtime_dependency 'awesome_print'
+  spec.add_runtime_dependency 'highline', '~> 1.7', '>= 1.7.8'
+
   spec.add_development_dependency "bundler", "~> 1.15"
   spec.add_development_dependency "rake", "~> 10.0"
   spec.add_development_dependency "rspec", "~> 3.0"

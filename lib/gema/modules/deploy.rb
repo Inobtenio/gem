@@ -1,6 +1,6 @@
 require 'net/ssh'
 require 'net/ssh/shell'
-class Deploy < Gema
+class Deploy
 
 	@shared_instance = Gema::Setup.shared_instance
 	@cli = HighLine.new

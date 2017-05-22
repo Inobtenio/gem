@@ -1,4 +1,4 @@
-class Setup < Gema
+class Setup
 
 	attr_accessor :app_name, :repo_url, :server_url, :user, :branch, :password, :deploy_to, :soflink_location, :linked_files, :keep_releases, :ruby_version, :rvm_gemset 
  	
