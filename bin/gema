@@ -1,0 +1,14 @@
+#!/usr/bin/env ruby
+require "gema"
+require "rake"
+
+tasks = ["deploy","help","install","setup","test"]
+if tasks.include?(ARGV[0])
+	if ARGV[1]
+		exec "rake #{ARGV[0]}:#{ARGV[1]}"
+	else
+		exec "rake #{ARGV[0]}"
+	end
+else
+	exec "rake help:suggestion[#{ARGV[0]}]"
+end
