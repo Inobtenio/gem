@@ -22,8 +22,6 @@ Gem::Specification.new do |spec|
       "public gem pushes."
   end
 
-  spec.require_paths = ["lib"]
-
   spec.files         = `git ls-files`.split("\n")
   spec.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   spec.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }

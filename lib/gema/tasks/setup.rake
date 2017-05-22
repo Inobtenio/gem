@@ -1,3 +1,6 @@
+require 'rake' unless defined? Rake
+extend Rake::DSL
+
 namespace :setup do
   task :check do
   	puts "setup:check"

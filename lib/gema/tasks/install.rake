@@ -1,12 +1,12 @@
-# desc "Install Gema, cap install STAGES=staging,production"
-task :install do
-  Install.execute
-end
+require 'rake' unless defined? Rake
+extend Rake::DSL
 
-task :verify do
-  Gema.verify
-end
+namespace :install do
+	task :go do
+	  Install.execute
+	end
 
-task :net do
-  
+	task :verify do
+	  Gema.verify
+	end
 end

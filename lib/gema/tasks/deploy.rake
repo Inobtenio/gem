@@ -1,3 +1,6 @@
+require 'rake' unless defined? Rake
+extend Rake::DSL
+
 namespace :deploy do
 	task :create do
 		Deploy.create

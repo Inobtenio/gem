@@ -1,3 +1,6 @@
+require 'rake' unless defined? Rake
+extend Rake::DSL
+
 namespace :help do
 	task :info do
 		puts "help:info"
