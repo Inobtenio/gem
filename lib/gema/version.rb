@@ -1,3 +1,3 @@
-class Gema
-  VERSION = "0.1.0"
+module Gema
+  VERSION = "0.1.0.alpha.2"
 end

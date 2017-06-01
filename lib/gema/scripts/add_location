@@ -1,0 +1,8 @@
+#!/bin/bash
+line=`awk "Location {p=1; next} p{a=$0; p=0} END{print NR}" $2`
+prev=$(($line-1))
+content=$(printf "$1")
+echo "$content" | dd of=tmp_f
+sed -i ${prev}r<(sed '1,4!d' tmp_f) $2
+rm tmp_f
+echo "Done"
