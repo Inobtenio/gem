@@ -48,9 +48,8 @@ class Deploy
   end
 
   def self.command_list mode=:create
-    @path  = Pathname.new(@shared_instance.deploy_to).join(@shared_instance.app_name)
-    commands = send("#{mode.to_s}_list").push(echo(nil, "Deployment complete.", nil))
-    return commands.join(';')
+    @path = Pathname.new(@shared_instance.deploy_to).join(@shared_instance.app_name)
+    return send("#{mode.to_s}_list").join(';')
   end
 
   def self.create_list
@@ -77,7 +76,8 @@ class Deploy
               bash("add_location", ERB.new(File.read(Gema.lib.join('generators/gema/templates/add_location_to_virtualhost.erb'))).result(binding), "#{@apache_sites_path}001-default"),
               "sudo #{chown(@shared_instance.user, @apache_sites_path)}",
               rm("add_location.sh"),
-              "sudo /etc/init.d/apache2 reload"
+              "sudo /etc/init.d/apache2 reload",
+              "history -c"
             ]
   end
 
@@ -89,7 +89,8 @@ class Deploy
               bundle,
               rake("db", "migrate"),
               rake("assets", "precompile"),
-              "touch tmp/restart.txt"
+              "touch tmp/restart.txt",
+              "history -c"
             ]
   end
 
@@ -108,18 +109,19 @@ class Deploy
   def self.execute_command sh, command
     sh.execute command do |process|
       process.on_output do |c, data|
-        if data.include?("password") || data.include?("Password")
+        if data.include?("assword")
           pass = @cli.ask("\nEnter your password:  ".green) { |q| q.echo = "*" }
           process.send_data("#{pass}\n")
         elsif data.include?("y[es]")
           answer = @cli.ask("#{data}")
           process.send_data("#{answer}\n")
-        elsif data.include?("Deployment complete")
-          @cli.say(data.orange)
-          sh.close!
         else
           $stdout.print data.green
         end
+      end
+      process.on_finish do |proc|
+        @cli.say("Deployment complete.".orange)
+        sh.close!
       end
     end
   end
@@ -197,7 +199,7 @@ class Deploy
   end
 
   def self.bash script_name, first, second
-    ". #{@path.join(script_name)}.sh '#{first}' #{second}"
+    ". #{script_name}.sh '#{first}' #{second}"
   end
 
   def self.rm path

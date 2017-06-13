@@ -1,49 +1,17 @@
 namespace :deploy do
+  desc "Deploy app from scratch"
   task :create do
     Deploy.create
   end
 
-  task :test => "setup:check" do
-    Deploy.connect
-  end
+  desc "Update an application that has already been deployed"
   task :update do
-    Deploy.connect :update
+    Deploy.update
   end
 
+  desc "Restore the application state to the last stable version"
   task :rollback do
     puts "deploy:rollback"
-  end
-end
-
-namespace :help do
-  task :info do
-    puts "help:info"
-  end 
-
-  task :suggestion, [:command] do |t, args|
-    puts args
-    Help.suggest args[:command]
-  end
-end
-
-namespace :install do
-  task :go do
-    Install.execute
-  end
-
-  task :verify do
-    Gema.verify
-  end
-end
-
-namespace :setup do
-  task :check do
-    puts "setup:check"
-    Setup.shared_instance.verify
-  end
-
-  task :another_task do
-    puts "setup:another_task"
   end
 end
 
@@ -52,3 +20,13 @@ namespace :test do
     puts "test:some_test"
   end 
 end
+
+task :install do
+  desc "Generate configuration files and directories"
+  Install.execute
+end
+
+task :help do
+  desc "Help"
+  puts "help:info"
+end 

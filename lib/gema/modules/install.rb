@@ -6,7 +6,7 @@ class Install
     puts "Creating files...".green
     puts "Rails.root"
     config_dir = Gema.config
-    deploy_yml = File.expand_path("../../templates/deploy.rb", __FILE__)
+    deploy_yml = Pathname.new(Gema.lib).join("generators/gema/templates/deploy.rb")
 
     Rake.mkdir_p config_dir
     puts "config/gema directory created.".green
